@@ -1,13 +1,25 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+
+# Environment / secrets
 .env
 .env.*
 !.env.example
 
+# Python
 __pycache__/
 *.pyc
 
+# IDE
 .vscode/
 .idea/
 
+# Logs
 *.log
+
+# Documents / images
+*.pdf
+*.png
