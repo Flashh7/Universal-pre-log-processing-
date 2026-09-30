@@ -1,0 +1,6 @@
+applications:
+  - id: payment-service
+    api_key: abc123
+
+  - id: auth-service
+    api_key: xyz456
