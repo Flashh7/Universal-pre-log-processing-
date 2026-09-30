@@ -1,0 +1,18 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: ulpf-clickhouse
+
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - clickhouse_logs:/var/log/clickhouse-server
+
+    restart: unless-stopped
+
+volumes:
+  clickhouse_data:
+  clickhouse_logs:
