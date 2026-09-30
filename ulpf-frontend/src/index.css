@@ -1,0 +1,948 @@
+:root {
+  --background: #F7F6F2;
+  --surface: #FFFFFF;
+  --accent: #B5A642;
+
+  --text: #222222;
+  --text-secondary: #6B6B66;
+
+  --border: #E4E1D8;
+  --border-thin: 1px;
+  --border-thick: 2px;
+
+  --error: #b44;
+
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ========================================
+   REUSABLE SIDEBAR
+   ======================================== */
+
+.sidebar {
+  width: 150px;
+  flex-shrink: 0;
+  border-right: var(--border-thick) solid var(--border);
+  transition: width 0.25s ease-in-out;
+}
+
+.sidebar-menu {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  border-bottom: var(--border-thick) solid var(--accent);
+  cursor: pointer;
+}
+
+.menu-icon {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.sidebar-menu:hover .menu-icon {
+  color: var(--accent);
+}
+
+.menu-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.sidebar-menu:hover .menu-label {
+  color: var(--accent);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px;
+  gap: 4px;
+}
+
+.nav-item {
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.nav-item:hover {
+  color: var(--accent);
+}
+
+.nav-item.active {
+  color: var(--accent);
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+.sidebar.collapsed .sidebar-menu {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar.collapsed .nav-item {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   REUSABLE HEADER
+   ======================================== */
+
+.header {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: var(--border-thick) solid var(--accent);
+  flex-shrink: 0;
+}
+
+.header-brand {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.content {
+  flex: 1;
+  padding: 24px
+}
+
+/* ========================================
+   REUSABLE TABLE
+   ======================================== */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--surface);
+  border: var(--border-thick) solid var(--border);
+  border-radius: 10px;
+}
+
+/* ========================================
+   TABLE
+   ======================================== */
+
+.ulpf-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text);
+  font-size: 9px;
+}
+
+
+/* ========================================
+   TABLE HEADER
+   ======================================== */
+
+.ulpf-table thead {
+  background: var(--background);
+}
+
+.ulpf-table th {
+  padding: 10px 10px;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: var(--border-thick) solid var(--border);
+}
+
+
+/* ========================================
+   TABLE BODY
+   ======================================== */
+
+.ulpf-table td {
+  padding: 10px 10px;
+  color: var(--text);
+  font-size: 12px;
+  border-bottom: var(--border-thin) solid var(--border);
+  white-space: nowrap;
+}
+
+
+.ulpf-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ========================================
+   ROW HOVER
+   ======================================== */
+
+.ulpf-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.ulpf-table tbody tr:hover {
+  background: var(--background);
+}
+
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.ulpf-table .table-empty {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+.table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ========================================
+   CLICKABLE ROWS
+   ======================================== */
+
+.table-row-clickable {
+  cursor: pointer;
+}
+
+.table-row-clickable:hover {
+  background: var(--background);
+}
+
+.table-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 24px;
+}
+
+/* ========================================
+   REUSABLE SEARCH AND FILTER
+   ======================================== */
+
+
+.search-filter-bar {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 10px;
+  background: var(--background);
+  border: var(--border-thick) solid var(--border);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   SEARCH
+   ======================================== */
+
+.search-box {
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-box input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-box input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-box input:focus {
+  border-color: var(--accent);
+}
+
+/* ========================================
+   FILTER
+   ======================================== */
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group select {
+  height: 30px;
+  padding: 0 30px 0 10px;
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.filter-group select:focus {
+  border-color: var(--accent);
+}
+
+.clear-filters {
+  height: 30px;
+  padding: 0 10px;
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.clear-filters:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ========================================
+   REUSABLE CARD
+   ======================================== */
+
+
+.ulpf-card {
+  background: var(--surface);
+  border: var(--border-thick) solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 8px 12px;
+  border-bottom: var(--border-thick) solid var(--border);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.card-content {
+  padding: 12px;
+}
+
+/* ========================================
+   REUSABLE DETAIL GRID
+   ======================================== */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.detail-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 700px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   REUSABLE HORIZONTAL BAR GRAPH
+   ======================================== */
+
+.horizontal-bar-graph {
+  width: 100%;
+}
+
+.horizontal-bar-title {
+  margin: 0 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.horizontal-bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.horizontal-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.horizontal-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--text);
+}
+
+.horizontal-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--background);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.horizontal-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* ========================================
+   REUSABLE LINE GRAPH
+   ======================================== */
+
+.line-graph {
+  width: 100%;
+}
+
+.line-graph-title {
+  margin: 0 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.line-graph-chart {
+  width: 100%;
+  height: 280px;
+}
+
+.line-graph-grid line {
+  stroke: var(--border);
+}
+
+.line-graph-x-axis path,
+.line-graph-y-axis path {
+  stroke: var(--border);
+}
+
+.line-graph-x-axis line,
+.line-graph-y-axis line {
+  stroke: var(--border);
+}
+
+/* ========================================
+   LOG EXPLORER PAGE
+   ======================================== */
+
+.log-explorer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+/* ========================================
+   SOURCES PAGE
+   ======================================== */
+
+.sources-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+/* ========================================
+   SOURCE ACTIONS
+   ======================================== */
+
+.sources-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ========================================
+   ADD SOURCE BUTTON
+   ======================================== */
+
+.add-source-button {
+  padding: 6px 10px;
+  border: var(--border-thick) solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.add-source-button:hover {
+  opacity: 0.9;
+}
+
+
+/* ========================================
+   SOURCE CARD GRID
+   ======================================== */
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+/* ========================================
+   SOURCE CARD CONTENT
+   ======================================== */
+
+.source-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.source-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.source-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* ========================================
+   SOURCE STATUS
+   ======================================== */
+
+.source-status {
+  font-weight: 500;
+}
+
+.source-status.active {
+  color: var(--accent);
+}
+
+.source-status.inactive {
+  color: var(--text-secondary);
+}
+
+.source-status.error {
+  color: var(--error);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 900px) {
+  .sources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   EVENT DETAILS PAGE
+   ======================================== */
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+/* ========================================
+   RAW EVENT
+   ======================================== */
+
+.raw-event {
+  margin: 0;
+  padding: 14px;
+  background: var(--background);
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* ========================================
+   OVERVIEW PAGE
+   ======================================== */
+
+
+.overview-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.metric-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.overview-section {
+  margin-bottom: 10px;
+}
+
+.overview-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1000px) {
+  .overview-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .overview-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .overview-page {
+    padding: 16px;
+  }
+
+  .overview-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   ADD SOURCE PAGE
+   ======================================== */
+
+.add-source-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+
+/* ========================================
+   ADD SOURCE HEADER
+   ======================================== */
+
+.add-source-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-source-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.add-source-header p {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+
+/* ========================================
+   FORM
+   ======================================== */
+
+.add-source-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ========================================
+   FORM SECTION
+   ======================================== */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: var(--border-thick) solid var(--border);
+  border-radius: 10px;
+}
+
+.form-section h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding-bottom: 8px;
+  border-bottom: var(--border-thick) solid var(--border);
+}
+
+
+/* ========================================
+   FORM GRID
+   ======================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+
+
+/* ========================================
+   FORM FIELD
+   ======================================== */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* ========================================
+   INPUTS
+   ======================================== */
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.form-field input,
+.form-field select {
+  height: 32px;
+  padding: 0 10px;
+}
+
+.form-field textarea {
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.4;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--accent);
+}
+
+
+/* ========================================
+   FORM ACTIONS
+   ======================================== */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+
+/* ========================================
+   CANCEL BUTTON
+   ======================================== */
+
+.form-actions button[type="button"] {
+  border: var(--border-thin) solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.form-actions button[type="button"]:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* ========================================
+   ADD SOURCE SUBMIT BUTTON
+   ======================================== */
+
+.form-actions button[type="submit"] {
+  border: var(--border-thick) solid var(--accent);
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.form-actions button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
