@@ -23,3 +23,9 @@ __pycache__/
 # Documents / images
 *.pdf
 *.png
+
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.webp
