@@ -7,10 +7,11 @@ import Overview from "../pages/overview";
 import LogExplorer from "../pages/log_explorer";
 import Sources from "../pages/sources";
 import EventDetails from "../pages/event_details";
+import AddSource from "../pages/add_source";
 
 import type { LogEvent } from "../types/log";
 
-export type Page = | "logs" | "overview" | "sources" | "event-details";
+export type Page = | "logs" | "overview" | "sources" | "event-details" | "add-source";
 
 function Layout() {
   const [activePage, setActivePage] = useState<Page>("logs");
@@ -32,7 +33,9 @@ function Layout() {
 
           {activePage === "logs" && (<LogExplorer onEventSelect={handleEventSelect}/>)}
 
-          {activePage === "sources" && (<Sources />)}
+          {activePage === "sources" && (<Sources setActivePage={setActivePage} />)}
+
+          {activePage === "add-source" && ( <AddSource setActivePage={setActivePage} /> )}
 
           {activePage === "event-details" && selectedEvent && (<EventDetails event={selectedEvent}/>)}
         </main>

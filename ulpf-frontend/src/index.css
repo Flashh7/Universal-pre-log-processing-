@@ -741,6 +741,207 @@ body {
   }
 }
 
+/* ========================================
+   ADD SOURCE PAGE
+   ======================================== */
+
+.add-source-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+
+/* ========================================
+   ADD SOURCE HEADER
+   ======================================== */
+
+.add-source-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-source-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.add-source-header p {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+
+/* ========================================
+   FORM
+   ======================================== */
+
+.add-source-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ========================================
+   FORM SECTION
+   ======================================== */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background: var(--surface);
+  border: var(--border-thick) solid var(--border);
+  border-radius: 10px;
+}
+
+.form-section h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding-bottom: 8px;
+  border-bottom: var(--border-thick) solid var(--border);
+}
+
+
+/* ========================================
+   FORM GRID
+   ======================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+
+
+/* ========================================
+   FORM FIELD
+   ======================================== */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* ========================================
+   INPUTS
+   ======================================== */
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: var(--border-thin) solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.form-field input,
+.form-field select {
+  height: 32px;
+  padding: 0 10px;
+}
+
+.form-field textarea {
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.4;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--accent);
+}
+
+
+/* ========================================
+   FORM ACTIONS
+   ======================================== */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+
+/* ========================================
+   CANCEL BUTTON
+   ======================================== */
+
+.form-actions button[type="button"] {
+  border: var(--border-thin) solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.form-actions button[type="button"]:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* ========================================
+   ADD SOURCE SUBMIT BUTTON
+   ======================================== */
+
+.form-actions button[type="submit"] {
+  border: var(--border-thick) solid var(--accent);
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.form-actions button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 

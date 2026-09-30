@@ -1,9 +1,14 @@
+export type SourceStatus =
+  | "Active"
+  | "Inactive"
+  | "Error";
+
 export interface Source {
   source_uid: string;
-  source_name: string;
+  name: string;
+  type: string;
   vendor_name: string;
-  source_type: string;
-  input_format: string;
-  status: "Active" | "Inactive" | "Error";
-  event_count: number;
+  product_name: string;
+  original_format: string;
+  status: SourceStatus;
 }
